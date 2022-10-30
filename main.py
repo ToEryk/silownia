@@ -186,7 +186,7 @@ for x in rows:
 var_all = StringVar(master)
 var_all.set(wszyscy[0]) # default value
 current_value = tk.DoubleVar()
-slider = ttk.Scale(tab2, from_=0, to=20, orient=HORIZONTAL, variable=current_value, command=slider_changed)
+slider = ttk.Scale(tab2, from_=0, to=10, orient=HORIZONTAL, variable=current_value, command=slider_changed)
 licznik = Label(tab2, text=math.floor(slider.get()))
 drop_karnet = OptionMenu(tab2, var_all, *wszyscy)
 
