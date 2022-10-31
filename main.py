@@ -13,9 +13,11 @@ master.title("Siłownia")
 tabControl = ttk.Notebook(master)
 tab1 = ttk.Frame(tabControl)
 tab2 = ttk.Frame(tabControl)
+tab3 = ttk.Frame(tabControl)
 
 tabControl.add(tab1, text='Wejścia i Wyjścia')
 tabControl.add(tab2, text='Kupno Karnetu')
+tabControl.add(tab3, text='Dodawanie osob')
 tabControl.pack(expand=1, fill="both")
 
 def timestamp():
@@ -186,23 +188,44 @@ for x in rows:
 var_all = StringVar(master)
 var_all.set(wszyscy[0]) # default value
 current_value = tk.DoubleVar()
-slider = ttk.Scale(tab2, from_=0, to=10, orient=HORIZONTAL, variable=current_value, command=slider_changed)
+slider = ttk.Scale(tab2, from_=0, to=20, orient=HORIZONTAL, variable=current_value, command=slider_changed)
 licznik = Label(tab2, text=math.floor(slider.get()))
 drop_karnet = OptionMenu(tab2, var_all, *wszyscy)
 
 
 
+
+
+
 Label(tab2, text="Wybierz Osobę").grid(row=0, column =1)
+
 drop_karnet.grid(row=1, column=1)
+
 Label(tab2, text="Wybierz Liczbę godzin do kupna").grid(row=2, column =1)
 slider.grid(row=3, column=1)
 licznik.grid(row=4, column=1)
 Button(tab2, text="Zatwierdź", command=karnet).grid(row=5, column=1)
 
+#tab3
 
+def dodaj():
+    osoba = []
+    osoba.append(input_imie.get(1.0, "end-1c"))
+    osoba.append("1")
+    osoba.append("0")
+    osoba.append("0")
+    osoba.append("0")
+    rows.append(osoba)
+    open(filename, "w+")
+    with open(filename, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+        writer.writerows(rows)
 
-
-
+input_imie = tk.Text(tab3,height = 1, width = 20)
+Label(tab3, text="Wpisz imię i nazwisko").grid(row=0, column =0)
+input_imie.grid(row=1, column = 0)
+Button(tab3, text="Zatwierdź", command=dodaj).grid(row=3, column=0)
 
 
 master.mainloop()
